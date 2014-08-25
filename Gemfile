@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '2.1.1'
 
 gem 'bootstrap-sass'
+gem 'bootstrap_form', '~> 2.1.1'
 gem 'coffee-rails'
 gem 'bcrypt', '~> 3.1.2'
 gem 'rails', '4.1.1'

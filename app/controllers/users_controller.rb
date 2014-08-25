@@ -1,4 +1,4 @@
-class UsersController::ApplicationController 
+class UsersController < ApplicationController  
   def new 
    @user = User.new 
   end 
@@ -11,9 +11,8 @@ class UsersController::ApplicationController
       render "new", notice: "Please make sure you filled out the correct information"
     end 
   end 
-
   private 
   def user_params
-    params.require(:user).permit(:email, :first_name, :last_name, :password)
+    params.require(:user).permit(:email, :first_name, :last_name, :password, :password_confirmation)
   end 
 end 
