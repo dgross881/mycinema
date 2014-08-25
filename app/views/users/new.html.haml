@@ -5,11 +5,11 @@
         %header
           %h1 Register
         %fieldset
-          =f.text_field :first_name, label: "First Name"
-          =f.text_field :last_name, label: "Lastt Name" 
-          =f.email_field :email, label: "Email" 
-          =f.password_field :password, label: "Password"
-          =f.password_field :password_confirmation, label: "Password (again)"
-        %fieldset.actions.control-group.col-sm-offset-2
-          .controls
-            %input(type="submit" value="Sign Up" class="btn btn-default")
+          = f.text_field :first_name, label: "First Name"
+          = f.text_field :last_name, label: "Lastt Name" 
+          = f.email_field :email, label: "Email" 
+          = f.password_field :password, label: "Password"
+          = f.password_field :password_confirmation, label: "Password (again)"
+          = f.form_group do 
+            = f.submit "Sign In", class: 'btn btn-default'
+
