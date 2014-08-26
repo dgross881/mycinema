@@ -1,12 +1,7 @@
 require 'spec_helper' 
 
 describe User do
-  let(:user) { User.new(
-               first_name: "Bob", 
-               last_name: "Builder", 
-               email: "MYEMAIL@GMAIL.COM",
-               password: "foobar",
-               password_confirmation: "foobar") }
+  let(:user) { Fabricate(:user) }
    
   context "Valid attributes for users" do  
     it { should validate_presence_of(:email) }
@@ -24,12 +19,14 @@ describe User do
 
   context "#downcase_email" do 
     it "it makes the email attributes lowercase" do 
+     user.email = "MYEMAIL@GMAIL.COM"
      expect{ user.downcase_email }.to change{ user.email }.
        from("MYEMAIL@GMAIL.COM").
          to("myemail@gmail.com")
     end 
 
     it "saves the email attributes to the database in lowercase letters" do 
+      user.email = "MYEMAIL@GMAIL.COM"
       user.save 
       user.reload
       expect(user.email).to eq("myemail@gmail.com")
@@ -38,7 +35,7 @@ describe User do
 
   context "#user_name" do 
     it "returns a users full_name as a string" do 
-      expect(user.full_name).to eq "Bob Builder" 
+      expect(user.full_name).to eq "#{user.first_name} #{user.last_name}"
     end 
   end 
 end

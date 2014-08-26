@@ -22,6 +22,8 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '2.99'
+  gem 'fabrication', '~> 2.11.3'
+  gem 'ffaker', '~> 1.25.0'
 end
 
 group :test do
