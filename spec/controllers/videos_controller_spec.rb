@@ -4,7 +4,7 @@ describe VideosController do
   let!(:video) { Fabricate.create(:video, title: "Superman") }
   describe "GET #show" do
     context "with authenticated users" do 
-      before { sign_in(@user) }
+      before { already_signed_in(@user) }
       it "assigns the requested video to @video" do 
         get :show,  id: video.id
         expect(assigns(:video)).to eq(video) 
@@ -21,12 +21,13 @@ describe VideosController do
 
   describe "Get #search" do 
     context "authenticated user" do 
-      before { sign_in @user } 
+      before { already_signed_in @user } 
       it "sets @resuls for authenticated users" do     
         post :search, search_term: "man"  
         expect(assigns(:results)).to eq([video])
       end 
-    end 
+    end
+
     context "unahenticated user" do 
       it "redirects to the sign in page" do 
         post :search, search_term: "man"  
