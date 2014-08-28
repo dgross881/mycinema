@@ -18,14 +18,9 @@ describe SessionsController do
     end
   end 
 
-  describe "PATCH #create" do
+  describe "Post #create" do
     context "Sign in with correct information" do 
-      let(:user) {User.create(
-                  first_name: "Daniel",
-                  last_name: "Boon", 
-                  email: "foo@gmail.com", 
-                  password: "foobar", 
-                  password_confirmation: "foobar")} 
+      let(:user) { Fabricate(:user) }
      
       it "redirects to home path after signing in" do 
         login_user 
@@ -34,7 +29,7 @@ describe SessionsController do
       end 
 
       it "finds the correct registered user" do 
-        expect(User).to receive(:find_by).with(email: "foo@gmail.com").and_return(user)
+        expect(User).to receive(:find_by).with(email: user.email).and_return(user)
         login_user 
       end 
 
@@ -56,12 +51,7 @@ describe SessionsController do
     end
   
   context "Sign in with incorrect information" do
-    let(:invalid_user) {User.create(
-                first_name: "Daniel",
-                last_name: "Boon", 
-                email: "foo@gmail.com", 
-                 password: "foobar", 
-                password_confirmation: "foobar")} 
+    let(:invalid_user) { Fabricate(:user) }
       
     it "sets a flash error message with incorrect information" do 
       post :create,  email: nil, password: nil  
