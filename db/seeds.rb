@@ -16,5 +16,5 @@ Video.create(title: 'Monk', description: 'Adrian Monk is a brilliant San Francis
 Video.create(title: 'Family Guy', description: 'In a wacky Rhode Island town, a dysfunctional family strive to cope with everyday life as they are thrown from one crazy scenario to another.', small_cover_url: '/tmp/family_guy.jpg', large_cover_url: '',  category: comedies)
 
 david = User.create(first_name: "David", last_name: "Gross", email: "foobar@gmail.com", password: "foobar", password_confirmation: "foobar") 
-Review.create(user: david, video: south_park, rating: 4, content: "This was an awesome tv series very funny")
-Review.create(user: david, video: south_park, rating: 2, content: "The movies was not as good as the tv show ")
+Review.create(user: david, video: south_park, rating: 4, content: "This was an awesome tv series very funny", created_at: 1.day.ago)
+Review.create(user: david, video: south_park, rating: 2, content: "The movies was not as good as the tv show ", created_at: 1.hour.ago)

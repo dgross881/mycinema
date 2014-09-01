@@ -7,14 +7,7 @@ Fabricator(:user) do
   password_confirmation { "foobar" } 
 end 
 
-Fabricator(:category) do
-  name { "comedies" }
-end 
 
-Fabricator(:video) do 
-  title { Faker::Lorem.words(6) }
-  description { Faker::Lorem.paragraph(2) } 
-end 
 
 
 
