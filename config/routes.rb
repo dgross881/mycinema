@@ -1,6 +1,5 @@
 Myflix::Application.routes.draw do
   root to: "pages#front"
-  resources :categories, only:[:show]
   get 'home', to: 'videos#index'
   resources :videos, only: [:show] do 
     collection do 
@@ -15,4 +14,7 @@ Myflix::Application.routes.draw do
 
   resources :users, only: [:create]
   resources :sessions, only: [:create]
+  resources :queue_items, only: [:create]
+  resources :categories, only:[:show]
+  resources :my_queue, to: "queue_items#index"
 end
