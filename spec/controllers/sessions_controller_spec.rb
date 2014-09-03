@@ -23,29 +23,29 @@ describe SessionsController do
       let(:user) { Fabricate(:user) }
      
       it "redirects to home path after signing in" do 
-        login_user 
+        post :create, email: user.email, password: user.password 
         expect(response).to be_redirect 
         expect(response).to redirect_to(home_path)
       end 
 
       it "finds the correct registered user" do 
         expect(User).to receive(:find_by).with(email: user.email).and_return(user)
-        login_user 
+        post :create, email: user.email, password: user.password 
       end 
 
       it "authinticates the registered user" do 
         User.stub(:find_by).and_return(user)
         expect(user).to receive(:authenticate)
-        login_user 
+        post :create, email: user.email, password: user.password 
       end 
 
       it "returnes a notice after successful sign in" do 
-        login_user 
+        post :create, email: user.email, password: user.password 
         expect(flash[:notice]).to match(/you are now signed in, enjoy/i)
       end 
        
       it "sets the user id in the session" do 
-        login_user 
+        post :create, email: user.email, password: user.password 
         expect(session[:user_id]).to eq(user.id)      
       end 
     end
@@ -73,5 +73,4 @@ end
 
 private 
 def login_user 
- post :create, email: user.email, password: user.password 
 end 

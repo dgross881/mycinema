@@ -10,8 +10,15 @@ describe UsersController do
 
   describe "Post #create" do
     context "with valid input" do
-        before { post :create, user: Fabricate.attributes_for(:user) }
-
+      before { post :create, user: 
+        { 
+          first_name: "Daniel",
+          last_name: "Gross",  
+          email: "foobar@gmail.com",
+          password: "foobar",
+          password_confirmation: "foobar" 
+        }
+      }
         it "creates the user" do
         expect(User.count).to eq 1 
       end 
@@ -38,11 +45,9 @@ describe UsersController do
       
       it "renders the :new template" do 
         expect(response).to render_template :new  
-      end 
-
-      it "sets @user" do 
+      end  
         
       end 
     end
   end
-end
+

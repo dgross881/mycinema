@@ -1,4 +1,5 @@
 class QueueItem < ActiveRecord::Base  
+  validates_presence_of :video_id
   belongs_to :user 
   belongs_to :video 
 
