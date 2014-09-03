@@ -1,22 +1,20 @@
 class ReviewsController < ApplicationController
+  before_filter :require_user 
   
-  def new 
-    @reviews = @video.review.new 
-  end 
-
   def create 
-    @user = User.find_by(params[:id])
-    @review = @user.review.new(review_params) 
+    @video = Video.find(params[:video_id])
+    @review = @video.reviews.build(review_params.merge!(user: current_user))
     if @review.save
-      redirect_to video_path, notice: "Your review has been posted" 
+      redirect_to @video
     else 
-      flash[:error] = "Your post was not posted" 
-     end 
-    end       
+      @reviews = @video.reviews.reload
+      render "videos/show"
+    end 
   end
 
   private 
    def review_params 
-    params.require(:review).permit(:content, :rating) 
+    params.require(:review).permit(:content, :rating, :video_id, :user_id) 
    end 
+end 
 
