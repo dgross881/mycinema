@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base 
   has_secure_password 
-  has_many :queue_items 
+  has_many :queue_items, -> {order("position ASC")}
 
   validates_presence_of :email, :password, :password_confirmation, :first_name, :last_name 
 

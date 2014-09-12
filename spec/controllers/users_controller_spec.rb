@@ -3,22 +3,14 @@ require "spec_helper"
 describe UsersController do
   describe "GET #new" do
     it "sets @user" do
-      get :new  
+      get :new
       expect(assigns(:user)).to be_a_new(User)
     end    
   end
 
   describe "Post #create" do
     context "with valid input" do
-      before { post :create, user: 
-        { 
-          first_name: "Daniel",
-          last_name: "Gross",  
-          email: "foobar@gmail.com",
-          password: "foobar",
-          password_confirmation: "foobar" 
-        }
-      }
+      before { post :create, user: Fabricate.attributes_for(:user) } 
         it "creates the user" do
         expect(User.count).to eq 1 
       end 
