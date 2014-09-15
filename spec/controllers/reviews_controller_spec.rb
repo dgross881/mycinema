@@ -3,7 +3,7 @@ describe ReviewsController do
   describe "POST create" do
     let (:video) { Fabricate(:video) }
     context "with authenticated user" do
-       before { already_signed_in @user }
+       before { already_signed_in }
      context "with valid input" do
        before {
          post :create, review: Fabricate.attributes_for(:review), video_id: video.id

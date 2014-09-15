@@ -19,4 +19,10 @@ class User < ActiveRecord::Base
   def full_name 
     first_name + " " + last_name 
   end 
+  
+  def normalize_queue_item_positions
+    self.queue_items.each_with_index do |queue_item, index|
+      queue_item.update_attributes(position: index + 1)
+    end
+  end 
 end 

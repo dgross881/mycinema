@@ -3,7 +3,7 @@ require "spec_helper"
 describe QueueItemsController do
   describe "GET #index" do
     it "sets @que_items to the queue items of the logged in user" do 
-      already_signed_in @user
+      already_signed_in 
       video = Fabricate(:video)
       queue_item1 = Fabricate(:queue_item, user: @user, video_id: video.id )
       queue_item2 = Fabricate(:queue_item, user: @user, video_id: video.id) 
@@ -17,7 +17,7 @@ describe QueueItemsController do
     end 
     
      describe "Post #create" do
-        before { already_signed_in @user }
+        before { already_signed_in }
        it "should redirect to the my_queue page" do
         video = Fabricate(:video) 
         post :create, video_id: video.id  
@@ -68,7 +68,7 @@ describe QueueItemsController do
    end
 
    describe "destroy  #delete" do
-     before { already_signed_in @user }
+     before { already_signed_in }
      it "redirects to my queue page" do 
        video = Fabricate(:video) 
        queue_item = Fabricate(:queue_item, video_id: video.id)
@@ -103,7 +103,7 @@ describe QueueItemsController do
 
   describe "Post update_queue" do
     context 'with valid inputs ' do 
-      before { already_signed_in @user }
+      before { already_signed_in }
       let(:futurama) {Fabricate(:video) } 
       let(:southpark) {Fabricate(:video) }
       let(:queue_item1) { Fabricate(:queue_item, user: @user, position: 1, video: futurama) }
@@ -126,7 +126,7 @@ describe QueueItemsController do
     end 
       
     context "with invalid inputs" do 
-      before { already_signed_in @user }
+      before { already_signed_in }
       let(:futurama) {Fabricate(:video) } 
       let(:southpark) {Fabricate(:video) }
       let(:queue_item1) { Fabricate(:queue_item, user: @user, position: 1, video: futurama) }
@@ -161,7 +161,7 @@ describe QueueItemsController do
       let(:southpark) {Fabricate(:video) }
       let(:queue_item1) { Fabricate(:queue_item, user: jim, position: 1, video: futurama) }
       let(:queue_item2) { Fabricate(:queue_item, user: @user, position: 2, video: southpark) }
-      before { already_signed_in @user } 
+      before { already_signed_in } 
       it "does not change the queue items" do 
         post :update_queue, queue_items: [{id: queue_item1.id, position: 2},{id:queue_item2.id, position: 1}]
         expect(queue_item1.reload.position).to eq(1)
