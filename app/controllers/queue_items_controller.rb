@@ -36,8 +36,8 @@ class QueueItemsController < ApplicationController
     ActiveRecord::Base.transaction do
       params[:queue_items].each do |queue_item_data|
         queue_item = QueueItem.find(queue_item_data["id"])
-          queue_item.update_attributes!(position: queue_item_data["position"], rating: queue_item_data["rating"]) if queue_item.user == current_user  
-        flash[:success] = "Your Queue Item list has been updated"
+          queue_item.update_attributes!(position: queue_item_data["position"], rating: queue_item_data["rating"]) if queue_item.user == current_user 
+          flash[:success] = "Your Queue Item list has been updated"
       end 
     end 
   end 

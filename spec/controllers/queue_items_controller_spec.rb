@@ -11,13 +11,13 @@ describe QueueItemsController do
       expect(assigns(:queue_items)).to match_array([queue_item1, queue_item2])
     end 
     
-    it "redirects to sign in page for unauthenticated users" do  
-      get :index 
-      expect(response).to redirect_to sign_in_path
-    end 
+   context "redirects to sign in page for unauthenticated users" do  
+     it_behaves_like 'require_user_sign_in' 
+     before { get :index }
+   end 
     
      describe "Post #create" do
-        before { already_signed_in }
+       before { already_signed_in }
        it "should redirect to the my_queue page" do
         video = Fabricate(:video) 
         post :create, video_id: video.id  
@@ -61,10 +61,8 @@ describe QueueItemsController do
    end 
     
    context "unathorized user" do 
-     it "redirects to the signin for unauthorized users" do 
-       post :create, video_id: 8
-       expect(response).to redirect_to sign_in_path
-     end 
+      before { post :create, video_id: 8 }
+      it_behaves_like "require_user_sign_in"
    end
 
    describe "destroy  #delete" do
@@ -149,10 +147,8 @@ describe QueueItemsController do
     end 
     
     context "with unauthenticated users" do 
-      it "redirects to the sign in path" do 
-        post :update_queue, queue_items: [{id: 2, position: 3}, {id: 1, position: 2}]
-        expect(response).to redirect_to sign_in_path
-      end 
+      before { post :update_queue, queue_items: [{id: 2, position: 3}, {id: 1, position: 2}] }
+        it_behaves_like "require_user_sign_in" 
     end 
     
     context "with queue_items that dont belong to the current user" do 

@@ -14,7 +14,9 @@ gem 'mysql2', '~> 0.3.16'
 
 group :development do
   gem 'sqlite3'
+  gem 'launchy', '~> 2.4.2'
   gem 'pry'
+  gem 'capybara', '~> 2.4.1'
   gem 'pry-nav'
   gem 'thin'
   gem "binding_of_caller"

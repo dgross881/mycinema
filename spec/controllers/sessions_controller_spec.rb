@@ -71,6 +71,3 @@ describe SessionsController do
   end
 end
 
-private 
-def login_user 
-end 

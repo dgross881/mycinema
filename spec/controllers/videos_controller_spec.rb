@@ -19,13 +19,11 @@ describe VideosController do
      end 
     end 
     
-    context "with unathenticated users" do
-      it "will redirect to sign in when not logged in" do 
-        get :show, id: video.id 
-        expect(response).to redirect_to sign_in_path
-      end   
-    end
-  end  
+    it_behaves_like "require_user_sign_in" do 
+      before { get :show, id: video.id }
+    end 
+  end
+    
 
   describe "Get #search" do 
     context "authenticated user" do 
@@ -36,11 +34,8 @@ describe VideosController do
       end 
     end
 
-    context "unahenticated user" do 
-      it "redirects to the sign in page" do 
-        post :search, search_term: "man"  
-        expect(response).to redirect_to sign_in_path
-      end 
+     it_behaves_like "require_user_sign_in" do 
+       before { post :search, search_term: "man" }  
     end 
   end  
 end 
