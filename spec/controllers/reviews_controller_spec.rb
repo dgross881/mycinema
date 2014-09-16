@@ -3,7 +3,7 @@ describe ReviewsController do
   describe "POST create" do
     let (:video) { Fabricate(:video) }
     context "with authenticated user" do
-       before { already_signed_in @user }
+       before { already_signed_in }
      context "with valid input" do
        before {
          post :create, review: Fabricate.attributes_for(:review), video_id: video.id
@@ -50,11 +50,10 @@ describe ReviewsController do
       end
     end
     
-    context "with unathenticated user" do
-      it "redirects user to the sign in path" do
+    it_behaves_like "require_user_sign_in" do 
+      before do 
         video = Fabricate(:video)
         post :create, review: Fabricate.attributes_for(:review), video_id: video.id
-        expect(response).to redirect_to sign_in_path
       end
     end
   end

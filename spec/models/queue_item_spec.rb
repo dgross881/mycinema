@@ -36,4 +36,32 @@ end
      expect(queue_item.category_name).to eq("comedies")
    end 
   end 
+
+  describe "#rating=" do
+    it "changes the rating of the review if review is present" do
+      futurama = Fabricate(:video)
+      david = Fabricate(:user) 
+      review = Fabricate(:review, user: david, video: futurama, rating: 2)
+      queue_item = Fabricate(:queue_item, user: david, video: futurama) 
+      queue_item.rating = 4 
+      expect(Review.first.rating).to  eq(4)
+    end 
+
+    it "creates the rating of the review if the review is present" do
+      futurama = Fabricate(:video)
+      david = Fabricate(:user) 
+      review = Fabricate(:review, user: david, video: futurama, rating: 2)
+      queue_item = Fabricate(:queue_item, user: david, video: futurama) 
+      queue_item.rating = nil 
+      expect(Review.first.rating).to be_nil 
+    end 
+
+    it "creates the review with the rating if the review isn't present" do 
+      futurama = Fabricate(:video)
+      david = Fabricate(:user) 
+      queue_item = Fabricate(:queue_item, user: david, video: futurama) 
+      queue_item.rating = 3 
+      expect(Review.first.rating).to eq(3) 
+    end 
+  end
 end

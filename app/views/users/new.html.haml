@@ -6,10 +6,10 @@
           %h1 Register
         %fieldset
           = f.text_field :first_name, label: "First Name"
-          = f.text_field :last_name, label: "Lastt Name" 
+          = f.text_field :last_name, label: "Last Name" 
           = f.email_field :email, label: "Email" 
           = f.password_field :password, label: "Password"
           = f.password_field :password_confirmation, label: "Password (again)"
           = f.form_group do 
-            = f.submit "Sign In", class: 'btn btn-default'
+            = f.submit "Register", class: 'btn btn-default'
 

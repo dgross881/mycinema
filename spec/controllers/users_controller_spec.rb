@@ -3,7 +3,7 @@ require "spec_helper"
 describe UsersController do
   describe "GET #new" do
     it "sets @user" do
-      get :new  
+      get :new
       expect(assigns(:user)).to be_a_new(User)
     end    
   end
@@ -14,12 +14,12 @@ describe UsersController do
         { 
           first_name: "Daniel",
           last_name: "Gross",  
-          email: "foobar@gmail.com",
+          email: "daniel@gmail.com",
           password: "foobar",
           password_confirmation: "foobar" 
         }
       }
-        it "creates the user" do
+      it "creates the user" do
         expect(User.count).to eq 1 
       end 
 
@@ -27,18 +27,17 @@ describe UsersController do
         expect(response).to redirect_to sign_in_path
       end 
     end 
-
+    
     context "with invalid input" do
       before { post :create, user: 
         { 
           first_name: "Daniel",
           last_name: nil,  
-          email: "foobar@gmail.com",
+          email: nil,
           password: "foobar",
           password_confirmation: "foobar" 
         }
       }
-      
       it "does not create the user" do 
         expect(User.count).to_not eq 1 
       end 
@@ -46,8 +45,7 @@ describe UsersController do
       it "renders the :new template" do 
         expect(response).to render_template :new  
       end  
-        
-      end 
-    end
-  end
+    end 
+  end 
+end 
 

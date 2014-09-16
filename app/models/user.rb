@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base 
   has_secure_password 
-  has_many :queue_items 
+  has_many :queue_items, -> {order("position ASC")}
 
   validates_presence_of :email, :password, :password_confirmation, :first_name, :last_name 
 
@@ -18,5 +18,11 @@ class User < ActiveRecord::Base
 
   def full_name 
     first_name + " " + last_name 
+  end 
+  
+  def normalize_queue_item_positions
+    self.queue_items.each_with_index do |queue_item, index|
+      queue_item.update_attributes(position: index + 1)
+    end
   end 
 end 

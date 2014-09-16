@@ -3,7 +3,7 @@ require "spec_helper"
 describe SessionsController do
   describe "GET #new" do
     context "Signed in user" do 
-      before { already_signed_in @user }  
+      before { already_signed_in}  
       it "returns the signed in user to home path when trying to visit signin path" do 
         get :new,  user_id: @user.id       
         expect(response).to redirect_to home_path 
@@ -71,6 +71,3 @@ describe SessionsController do
   end
 end
 
-private 
-def login_user 
-end 
