@@ -50,9 +50,16 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    columnize (0.8.9)
     daemons (1.1.9)
     database_cleaner (1.2.0)
     debug_inspector (0.0.2)
+    debugger (1.6.8)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.2.0)
+      debugger-ruby_core_source (~> 1.3.5)
+    debugger-linecache (1.2.0)
+    debugger-ruby_core_source (1.3.5)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     eventmachine (1.0.0)
@@ -78,6 +85,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     method_source (0.8.2)
+    methodfinder (2.0.0)
     mime-types (1.25.1)
     mini_portile (0.6.0)
     minitest (5.3.4)
@@ -93,6 +101,8 @@ GEM
       slop (~> 3.4)
     pry-nav (0.2.3)
       pry (~> 0.9.10)
+    pry-rails (0.3.2)
+      pry (>= 0.9.10)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -180,15 +190,18 @@ DEPENDENCIES
   capybara (~> 2.4.1)
   coffee-rails
   database_cleaner (= 1.2.0)
+  debugger
   fabrication (~> 2.11.3)
   ffaker (~> 1.25.0)
   haml-rails
   jquery-rails
   launchy (~> 2.4.2)
+  methodfinder (~> 2.0.0)
   mysql2 (~> 0.3.16)
   pg (~> 0.17.1)
   pry
   pry-nav
+  pry-rails (~> 0.3.2)
   rails (= 4.1.1)
   rails_12factor
   rspec-rails (= 2.99)

@@ -1,6 +1,20 @@
 require "spec_helper" 
 
 describe UsersController do
+
+  describe "GET #show" do 
+    it_behaves_like "require_user_sign_in" do 
+      before { get :show, id: 3 }  
+    end 
+
+    it "sets @user" do 
+      already_signed_in 
+      david = Fabricate(:user)
+      get :show, id: david.id 
+      expect(assigns(:user)).to eq(david)
+    end 
+  end 
+
   describe "GET #new" do
     it "sets @user" do
       get :new

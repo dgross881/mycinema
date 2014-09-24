@@ -11,6 +11,7 @@ describe User do
     it { should validate_presence_of(:password_confirmation) }
     it { should validate_uniqueness_of(:email) } 
     it { should have_many(:queue_items).order("position ASC") }
+    it { should have_many(:reviews) }
 
     it "must be a verified email address" do 
       user.email = "Thisisnoemail" 
@@ -39,4 +40,20 @@ describe User do
       expect(user.full_name).to eq "#{user.first_name} #{user.last_name}"
     end 
   end 
+
+  context "#follows?" do 
+    it "returns true if the user has a following friendship with anoth user" do  
+      alice = Fabricate(:user)
+      bob = Fabricate(:user)
+      Fabricate(:friendship, leader: bob, follower: alice) 
+      expect(alice.follows?(bob)).to be_truthy 
+    end 
+   
+    it "returns false if the user doesn not have a following relationship with another user" do
+      alice = Fabricate(:user)
+      bob = Fabricate(:user)
+      Fabricate(:friendship, leader: alice, follower: bob) 
+      expect(alice.follows?(bob)).to be_falsey  
+    end  
+  end
 end

@@ -37,6 +37,7 @@
             %li.row
               .col-md-2
                 %span Rating: #{review.rating} / 5 
-                %p #{current_user.full_name}
+                %p
+                  = link_to review.user.full_name, review.user
               .col-md-8
                 %p= review.content
