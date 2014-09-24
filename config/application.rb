@@ -1,5 +1,4 @@
 require File.expand_path('../boot', __FILE__)
-
 require 'rails/all'
  
 Bundler.require(:default, Rails.env)
@@ -14,6 +13,7 @@ module Myflix
     config.generators do |g|
       g.orm :active_record
       g.template_engine :haml
+    config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/mailer_previews"
     end
   end
 end

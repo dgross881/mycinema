@@ -11,6 +11,7 @@ gem 'sass-rails'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'mysql2', '~> 0.3.16'
+gem 'figaro', '~> 1.0.0'
 
 group :development do
   gem 'sqlite3'
