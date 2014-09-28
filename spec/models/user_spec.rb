@@ -19,6 +19,13 @@ describe User do
    end 
  end 
 
+  context "#token" do 
+    it "generates a random token fora user" do 
+      alice = Fabricate(:user) 
+      expect(alice.token).to be_present
+    end 
+  end 
+
   context "#downcase_email" do 
     it "it makes the email attributes lowercase" do 
      user.email = "MYEMAIL@GMAIL.COM"

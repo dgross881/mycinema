@@ -16,6 +16,7 @@ gem 'figaro', '~> 1.0.0'
 group :development do
   gem 'sqlite3'
   gem 'launchy', '~> 2.4.2'
+  gem 'letter_opener', '~> 1.2.0'
   gem 'debugger' 
   gem 'pry'
   gem 'pry-rails', '~> 0.3.2' 

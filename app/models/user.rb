@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
                   }
  
   before_save :downcase_email 
+  before_create :generate_token 
 
   def downcase_email
     self.email = email.downcase 
@@ -34,6 +35,10 @@ class User < ActiveRecord::Base
 
   def can_follow?(another_user)
     !(self.follows?(another_user) || self == another_user)
+  end 
+
+  def generate_token 
+    self.token = SecureRandom.urlsafe_base64
   end 
 end 
 
