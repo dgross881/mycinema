@@ -2,8 +2,8 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-  username: root  
-  password: theone881
+  username: root
+  password: <%= ENV["mysql_password"] %>
   socket: /tmp/mysql.sock
 
 development:
@@ -39,5 +39,5 @@ test:
 production:
   <<: *default
   database: movie_production
-  username: biller
-  password: <%= ENV['BILLER_DATABASE_PASSWORD'] %>
+  username: root
+  password: <%= ENV['MYSQL_PASSWORD'] %>

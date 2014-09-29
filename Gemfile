@@ -11,13 +11,18 @@ gem 'sass-rails'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'mysql2', '~> 0.3.16'
+gem 'figaro', '~> 1.0.0'
 
 group :development do
   gem 'sqlite3'
   gem 'capybara-email', '~> 2.4.0'
   gem 'launchy', '~> 2.4.2'
+  gem 'letter_opener', '~> 1.2.0'
+  gem 'debugger' 
   gem 'pry'
+  gem 'pry-rails', '~> 0.3.2' 
   gem 'capybara', '~> 2.4.1'
+  gem 'methodfinder', '~> 2.0.0'
   gem 'pry-nav'
   gem 'thin'
   gem "binding_of_caller"

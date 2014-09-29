@@ -11,12 +11,20 @@ describe User do
     it { should validate_presence_of(:password_confirmation) }
     it { should validate_uniqueness_of(:email) } 
     it { should have_many(:queue_items).order("position ASC") }
+    it { should have_many(:reviews) }
 
     it "must be a verified email address" do 
       user.email = "Thisisnoemail" 
       expect(user).to_not be_valid 
    end 
  end 
+
+  context "#token" do 
+    it "generates a random token fora user" do 
+      alice = Fabricate(:user) 
+      expect(alice.token).to be_present
+    end 
+  end 
 
   context "#downcase_email" do 
     it "it makes the email attributes lowercase" do 
@@ -39,4 +47,20 @@ describe User do
       expect(user.full_name).to eq "#{user.first_name} #{user.last_name}"
     end 
   end 
+
+  context "#follows?" do 
+    it "returns true if the user has a following friendship with anoth user" do  
+      alice = Fabricate(:user)
+      bob = Fabricate(:user)
+      Fabricate(:friendship, leader: bob, follower: alice) 
+      expect(alice.follows?(bob)).to be_truthy 
+    end 
+   
+    it "returns false if the user doesn not have a following relationship with another user" do
+      alice = Fabricate(:user)
+      bob = Fabricate(:user)
+      Fabricate(:friendship, leader: alice, follower: bob) 
+      expect(alice.follows?(bob)).to be_falsey  
+    end  
+  end
 end
