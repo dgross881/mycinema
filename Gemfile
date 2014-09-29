@@ -14,6 +14,7 @@ gem 'mysql2', '~> 0.3.16'
 
 group :development do
   gem 'sqlite3'
+  gem 'capybara-email', '~> 2.4.0'
   gem 'launchy', '~> 2.4.2'
   gem 'pry'
   gem 'capybara', '~> 2.4.1'
