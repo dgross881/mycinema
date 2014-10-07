@@ -13,7 +13,6 @@ describe UsersController do
       get :show, id: david.id 
       expect(assigns(:user)).to eq(david)
     end 
-  end 
 
   describe "GET #new" do
     it "sets @user" do
@@ -40,6 +39,31 @@ describe UsersController do
       it "redirects to the signin page" do  
         expect(response).to redirect_to sign_in_path
       end 
+      
+      it "makes the user follow the inviter" do 
+        david = Fabricate(:user)
+        invitation = Fabricate(:invitation, inviter: david , recipient_email: "joe@gmail.com")
+        post :create, user: { email: "joe@gmail.com", password: "foobar", password_confirmation: "foobar", first_name: "Joe", last_name: "Gross" }, invitation_token: invitation.token
+        joe = User.where(email: "joe@gmail.com").first 
+        expect(joe.follows?(david)).to be_truthy
+      end  
+      
+
+      it "makes the inviter follow the user" do 
+        david = Fabricate(:user)
+        invitation = Fabricate(:invitation, inviter: david , recipient_email: "joe@gmail.com")
+        post :create, user: { email: "joe@gmail.com", password: "foobar", password_confirmation: "foobar", first_name: "Joe", last_name: "Gross" }, invitation_token: invitation.token
+        joe = User.where(email: "joe@gmail.com").first 
+        expect(david.follows?(joe)).to be_truthy
+      end  
+
+
+      it "expires the users invitation uppon exceptance" do 
+        david = Fabricate(:user)
+        invitation = Fabricate(:invitation, inviter: david , recipient_email: "joe@gmail.com")
+        post :create, user: { email: "joe@gmail.com", password: "foobar", password_confirmation: "foobar", first_name: "Joe", last_name: "Gross" }, invitation_token: invitation.token
+        expect(Invitation.first.token).to be_nil
+      end 
     end 
     
     context "with invalid input" do
@@ -63,7 +87,6 @@ describe UsersController do
    
     context "sending email" do 
       after { ActionMailer::Base.deliveries.clear }
-      
       it "sends out email to the user with valid inputs" do 
         post :create, user: { first_name: "David", last_name: "Gross",  email: "dave@example.com", password: "foobar", password_confirmation: "foobar"}
         expect(ActionMailer::Base.deliveries.last.to).to eq(['dave@example.com'])
@@ -80,5 +103,31 @@ describe UsersController do
       end 
     end 
   end 
-end 
+
+    describe "GET new_with_invitation_token" do
+      it "sets @user with recipient's email" do
+        invitation = Fabricate(:invitation)
+        get :new_with_invitation_token, token: invitation.token
+        expect(response).to render_template :new 
+      end 
+      
+      it "sets @user with recipient's email" do
+        invitation = Fabricate(:invitation)
+        get :new_with_invitation_token, token: invitation.token
+        expect(assigns(:user).email).to eq(invitation.recipient_email)
+      end 
+      
+      it "sets @invitation_token" do
+        invitation = Fabricate(:invitation)
+        get :new_with_invitation_token, token: invitation.token
+        expect(assigns(:invitation_token)).to eq(invitation.token)
+      end 
+      
+      it "redirects to invalid token path for invalid token" do 
+        get :new_with_invitation_token, token: "asagewrt4242f" 
+        expect(response).to redirect_to expired_token_path
+      end 
+     end 
+   end 
+ end 
  

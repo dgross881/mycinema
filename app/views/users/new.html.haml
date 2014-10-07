@@ -10,6 +10,7 @@
           = f.email_field :email, label: "Email" 
           = f.password_field :password, label: "Password"
           = f.password_field :password_confirmation, label: "Password (again)"
+          = hidden_field_tag :invitation_token, @invitation_token 
           = f.form_group do 
             = f.submit "Register", class: 'btn btn-default'
 

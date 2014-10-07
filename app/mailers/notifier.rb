@@ -10,5 +10,10 @@ class Notifier < ActionMailer::Base
     @user = user 
     mail to: user.email, subject: "Forgot password Reset Confirmation"
   end 
+
+  def send_invite_email(invitation)
+     @invitation = invitation
+     mail to: invitation.recipient_email, from: "info@myflix", subject: "Invitation to join MyFlix"
+  end
 end 
 

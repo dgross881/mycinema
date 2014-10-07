@@ -12,7 +12,6 @@ feature 'User followind' do
     click_link alice.full_name
     click_link "Follow" 
     expect(page).to have_content(alice.full_name)
-    
     unfollows(alice)
     expect(page).not_to have_content(alice.full_name)
   end 

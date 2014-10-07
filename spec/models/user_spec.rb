@@ -13,18 +13,15 @@ describe User do
     it { should have_many(:queue_items).order("position ASC") }
     it { should have_many(:reviews) }
 
+    it_behaves_like "tokenable" do 
+      let(:object) {Fabricate(:user) }
+    end 
+
     it "must be a verified email address" do 
       user.email = "Thisisnoemail" 
       expect(user).to_not be_valid 
    end 
  end 
-
-  context "#token" do 
-    it "generates a random token fora user" do 
-      alice = Fabricate(:user) 
-      expect(alice.token).to be_present
-    end 
-  end 
 
   context "#downcase_email" do 
     it "it makes the email attributes lowercase" do 
@@ -33,6 +30,7 @@ describe User do
        from("MYEMAIL@GMAIL.COM").
          to("myemail@gmail.com")
     end 
+
 
     it "saves the email attributes to the database in lowercase letters" do 
       user.email = "MYEMAIL@GMAIL.COM"
@@ -63,4 +61,19 @@ describe User do
       expect(alice.follows?(bob)).to be_falsey  
     end  
   end
-end
+
+  describe "#follow" do 
+    it "follows another user" do 
+      david = Fabricate(:user) 
+      claine = Fabricate(:user)
+      david.follow(claine)
+      expect(david.follows?(claine)).to be_truthy
+    end 
+
+    it "does not follow one self" do  
+      david = Fabricate(:user) 
+      david.follow(david)
+      expect(david.follows?(david)).to be_falsey
+    end 
+  end 
+end 

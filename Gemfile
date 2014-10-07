@@ -15,7 +15,7 @@ gem 'figaro', '~> 1.0.0'
 
 group :development do
   gem 'sqlite3'
-  gem 'capybara-email', '~> 2.4.0'
+  gem 'capybara-email', github: 'dockyard/capybara-email'
   gem 'launchy', '~> 2.4.2'
   gem 'letter_opener', '~> 1.2.0'
   gem 'debugger' 
