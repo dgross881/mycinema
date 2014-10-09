@@ -1,5 +1,5 @@
 class Notifier < ActionMailer::Base
-  default from: "dgross881@gmail.com"
+  default from: ENV['GMAIL_USERNAME']
 
   def send_welcome_email(user)
     @user = user
