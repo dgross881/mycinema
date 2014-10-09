@@ -8,7 +8,7 @@ class InvitationsController < ApplicationController
   def create
     @invitation = Invitation.new(invitation_params.merge!(inviter_id: current_user.id))
     if @invitation.save
-      Notifier.send_invite_email(@invitation).deliver
+      Notifier.delay.send_invite_email(@invitation)
       flash[:success] = "Your Invitation has been sent"
       redirect_to new_invitation_path
     else 

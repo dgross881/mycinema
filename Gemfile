@@ -12,6 +12,8 @@ gem 'uglifier'
 gem 'jquery-rails'
 gem 'mysql2', '~> 0.3.16'
 gem 'figaro', '~> 1.0.0'
+gem 'sidekiq', '~> 3.2.5'
+gem 'unicorn', '~> 4.8.3'
 
 group :development do
   gem 'sqlite3'
