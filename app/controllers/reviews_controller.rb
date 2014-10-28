@@ -1,5 +1,14 @@
 class ReviewsController < ApplicationController
   before_filter :require_user 
+
+  def index 
+    if params[:search]
+      @reviews = Sunpost.search(Review) do 
+        fulltext params[:search]
+      end
+      @results = @reviews.reulsts 
+    end 
+  end 
   
   def create 
     @video = Video.find(params[:video_id])

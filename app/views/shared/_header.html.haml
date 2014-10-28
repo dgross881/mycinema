@@ -5,10 +5,10 @@
     %li= link_to "Videos", root_path  
     %li= link_to "My Queue", my_queue_index_path
     %li= link_to "Friends", friends_path 
-  = form_tag(search_videos_path, method: "get", class: "col-md-5 navbar-form") do 
+  = form_tag search_videos_path, method: "get", class: 'col-md-5 navbar-form' do
     .form-group
-      %input.form-control(name="search_term" type="text" placeholder="Search for videos here")
-    %button.btn.btn-default(type="submit") Search
+      = text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search for a video here'
+      = submit_tag "search", class: 'button btn btn-default' 
   #user_links.pull-right
     %ul
       %li.dropdown

@@ -7,6 +7,11 @@ Fabricator(:user) do
   password_confirmation { "foobar" } 
 end 
 
+Fabricator(:admin, from: :user) do 
+ admin true 
+end 
+
+
 
 
 

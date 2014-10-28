@@ -5,9 +5,13 @@ Myflix::Application.routes.draw do
     collection do 
       get 'search', to: 'videos#search' 
     end 
-    resources :reviews, only: [:create]
+    resources :reviews, only: [:create, :index]
   end 
-  
+
+  namespace :admin do 
+    resources :videos, only: [:new, :create]
+  end 
+
   resources :users, only: [:create, :show]  
   get 'friends', to: "friendships#index", as: 'friends'
   resources :friendships, only:[:create, :destroy]

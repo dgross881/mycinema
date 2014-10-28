@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141001102658) do
+ActiveRecord::Schema.define(version: 20141028023806) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20141001102658) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "token"
+    t.boolean  "admin"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
@@ -68,11 +69,12 @@ ActiveRecord::Schema.define(version: 20141001102658) do
   create_table "videos", force: true do |t|
     t.string   "title"
     t.text     "description"
-    t.string   "small_cover_url"
-    t.string   "large_cover_url"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "category_id"
+    t.string   "large_cover"
+    t.string   "small_cover"
+    t.string   "video_url"
   end
 
 end

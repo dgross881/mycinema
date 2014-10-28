@@ -29,8 +29,9 @@ describe VideosController do
     context "authenticated user" do 
       before { already_signed_in } 
       it "sets @resuls for authenticated users" do     
-        post :search, search_term: "man"  
-        expect(assigns(:results)).to eq([video])
+        get :search, {search: "Superman"} 
+        expect(Sunspot.session).to be_a_search_for(Video)
+        expect(Sunspot.session).to have_search_params(:fulltext, "Superman")
       end 
     end
 

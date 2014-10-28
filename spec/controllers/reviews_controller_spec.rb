@@ -1,5 +1,14 @@
 require 'spec_helper'
+
 describe ReviewsController do
+  #describe "GET index" do 
+    #it "performs a search for a matching comment text" do 
+     #get :index, {search: "good"}, valid_session
+     #expect(Sunspot.session).to be_a_search_for(Review)
+     #expect(Sunspot.session).to have_search_params(:fulltext, "good")
+   #end 
+  #end 
+
   describe "POST create" do
     let (:video) { Fabricate(:video) }
     context "with authenticated user" do

@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base 
+  rolify
   include Tokenable 
   has_secure_password 
   has_many :reviews 
@@ -41,6 +42,9 @@ class User < ActiveRecord::Base
   def follow(another_user) 
     following_friends.create(leader: another_user) if can_follow?(another_user) 
   end 
-   
+
+  def has_role?(role)
+    return !!self.roles.find_by_name(role.to_s.camelize)
+  end
 end 
 

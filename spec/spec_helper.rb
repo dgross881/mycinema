@@ -24,6 +24,11 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
   config.include AuthenticationHelpers::Controller, type: :controller  
   config.include RailsDomIdHelper, type: :feature 
+  config.include SunspotMatchers 
+
+  config.before do 
+    Sunspot.session = SunspotMatchers::SunspotSessionSpy.new(Sunspot.session)
+  end
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

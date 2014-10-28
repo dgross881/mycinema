@@ -1,7 +1,7 @@
 class VideosController < ApplicationController 
   before_filter :require_user 
 
-  def index 
+  def index
     @categories = Category.all 
   end 
 
@@ -10,7 +10,10 @@ class VideosController < ApplicationController
     @reviews = @video.reviews 
   end 
 
-  def search
-    @results = Video.search_by_title(params[:search_term])
+  def search 
+    @search = Video.search do
+      fulltext params[:search]
+    end 
+    @results = @search.results
   end 
 end 
