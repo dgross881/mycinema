@@ -7,7 +7,7 @@ Myflix::Application.configure do
 
   config.serve_static_assets = false
 
-  config.assets.compress = true
+  config.assets.compress = false
   config.assets.js_compressor = :uglifier
 
   config.assets.compile = true 
@@ -25,4 +25,10 @@ Myflix::Application.configure do
   :domain         => 'myflixcinema.herokuapp.com',
   :authentication => :plain,
   }
+  
+  config.active_record.dump_schema_after_migration = false
+  config.serve_static_assets = true
+  config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
+  config.assets.compile = true
+  config.assets.compress = true
 end
