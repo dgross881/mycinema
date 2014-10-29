@@ -40,4 +40,4 @@ production:
   <<: *default
   database: movie_production
   username: root
-  password: <%= ENV['MYSQL_PASSWORD'] %>
+  password: <%= ENV['mysql_password'] %>
