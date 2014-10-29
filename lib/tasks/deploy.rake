@@ -18,3 +18,4 @@ namespace :deploy do
       deployment.deploy
     end
   end
+
