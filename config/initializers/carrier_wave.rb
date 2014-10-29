@@ -10,7 +10,7 @@ CarrierWave.configure do |config|
       :host                   => 's3.example.com',             # optional, defaults to nil
       :endpoint               => 'https://s3.example.com:8080' # optional, defaults to nil
     }
-    config.fog_directory  = 'name_of_directory'                          # required
+    config.fog_directory  = ENV['aws_directory']                          # required
   else 
     config.storage = :file 
     config.enable_processing = Rails.env.development?
