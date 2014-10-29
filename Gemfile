@@ -4,6 +4,7 @@ ruby '2.1.1'
 gem 'bootstrap-sass'
 gem 'bootstrap_form', '~> 2.1.1'
 gem 'sunspot_rails', '~> 2.1.1'
+gem 'sunspot_solr', '~> 2.1.1'
 gem 'coffee-rails'
 gem 'bcrypt', '~> 3.1.2'
 gem 'paratrooper', '~> 2.4.1'
@@ -42,7 +43,6 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '2.99'
-  gem 'sunspot_solr', '~> 2.1.1'
   gem 'fabrication', '~> 2.11.3'
   gem 'ffaker', '~> 1.25.0'
   gem 'sunspot_matchers', '~> 2.1.1.0'
