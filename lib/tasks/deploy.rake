@@ -17,3 +17,4 @@ require 'paratrooper'
 
      deployment.deploy
    end
+  end 
