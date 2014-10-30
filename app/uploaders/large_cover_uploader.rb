@@ -1,6 +1,6 @@
 class LargeCoverUploader < CarrierWave::Uploader::Base
    include CarrierWave::MiniMagick
-  storage :file
+
   process resize_to_fit: [665, 375]
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
