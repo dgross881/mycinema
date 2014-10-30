@@ -14,3 +14,4 @@
 //= require jquery_ujs
 //= jquery.uploadify.min.js
 //= require bootstrap
+//= require_tree
