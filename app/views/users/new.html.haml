@@ -2,12 +2,14 @@
 %script{:type => "text/javascript"}
   Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
 
+= javascript_include_tag 'payment-form'
+
 %section.register.container
   .row
     .col-sm-10.col-sm-offset-1
       %header 
         %h1 Register
-      = bootstrap_form_for @user, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-6", id: "payment-form" do |f|
+      = bootstrap_form_for @user, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-6", html: {id: "payment-form" } do |f|
         %span.payment-errors
           = f.text_field :first_name, label: "First Name"
           = f.text_field :last_name, label: "Last Name" 
