@@ -15,6 +15,7 @@ class UsersController < ApplicationController
       handle_invitation
       Stripe.api_key = ENV['STRIPE_SECRET_KEY']
       Stripe::Charge.create( :amount => 400,:currency => "usd", :card => params[:stripeToken], :description => "Charge for test@example.com" )
+      StripeWrapper::Charge.create
       Notifier.send_welcome_email(@user).deliver
       redirect_to sign_in_path, notice: "You are now signed up, Please login"
     else 

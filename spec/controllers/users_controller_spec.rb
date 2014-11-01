@@ -1,6 +1,6 @@
 require "spec_helper" 
 
-describe UsersController do
+describe UsersController, :vcr  do
 
   describe "GET #show" do 
     it_behaves_like "require_user_sign_in" do 
@@ -22,6 +22,12 @@ describe UsersController do
   end
 
   describe "Post #create" do
+   context "valid personal info and valid card" do
+     let(:charge) { double(:charge, successful?: true) } 
+     before do 
+       StripeWrapper::Charge.should_receive(:create).and_return(charge)
+     end 
+   end
     context "with valid input" do
       before { post :create, user: 
         { 
@@ -66,6 +72,25 @@ describe UsersController do
       end 
     end 
     
+    context "with valid personal info and declined card" do
+      before do 
+        charge = double(:charge, successful?: false)
+        StripeWrapper::Charge.stub(:create).and_return(charge)
+       
+      end 
+     it "does not create a new user record" do
+        post :create, user: Fabricate.attributes_for(:user), stripeToken: '12345'
+        expect(user.count).to eq 0
+     end 
+
+     it "renders the new template" do
+       
+     end
+
+     it "sets the flash error message" do
+       
+     end
+    end
     context "with invalid input" do
       before { post :create, user: 
         { 
@@ -83,6 +108,10 @@ describe UsersController do
       it "renders the :new template" do 
         expect(response).to render_template :new  
       end  
+
+      it "does not charge the credit card" do
+        
+      end
     end 
    
     context "sending email" do 

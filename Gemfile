@@ -47,6 +47,8 @@ group :development, :test do
   gem 'fabrication', '~> 2.11.3'
   gem 'ffaker', '~> 1.25.0'
   gem 'sunspot_matchers', '~> 2.1.1.0'
+  gem 'vcr', '~> 2.9.3'
+  gem 'webmock', '~> 1.20.0'
 end
 
 group :test do

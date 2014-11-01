@@ -4,7 +4,8 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'capybara/email/rspec'
 require 'sidekiq/testing'
-require 'pry' 
+require 'vcr'
+require 'pry'
 
 Sidekiq::Testing.inline! 
 
@@ -21,10 +22,19 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+VCR.configure do |c|
+  c.ignore_localhost = true # After loading in gem 'selenium-webdriver', type this in. It will prevent vcr's default hook/default cassette-recording into http every request to the local host (see.. https://www.relishapp.com/vcr/vcr/v/2-3-0/docs/configuration/ignore-request).
+  c.cassette_library_dir = 'spec/cassettes'
+  c.cassette_library_dir = 'spec/cassettes'
+  c.hook_into :webmock
+  c.configure_rspec_metadata!
+end
+
 RSpec.configure do |config|
   config.include AuthenticationHelpers::Controller, type: :controller  
   config.include RailsDomIdHelper, type: :feature 
   config.include SunspotMatchers 
+  config.treat_symbols_as_metadata_keys_with_true_values = true
 
   config.before do 
     Sunspot.session = SunspotMatchers::SunspotSessionSpy.new(Sunspot.session)
