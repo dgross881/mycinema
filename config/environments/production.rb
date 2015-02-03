@@ -31,4 +31,10 @@ Myflix::Application.configure do
   config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
   config.assets.compile = true
   config.assets.compress = true
+  
+  PAPERCLIP_STORAGE_OPTIONS = {
+     storage: :s3,
+     s3_credentials: "#{Rails.root}/config/s3.yml",
+     s3_protocol: 'https'
+  }
 end
